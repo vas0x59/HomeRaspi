@@ -1,6 +1,6 @@
 var gv = require('./modules_files/globalVars.js');
 var modulesTcp = require("./modules_files/modulesTcp.js");
- 
+var alg = require('./alg/alg');
 
 //tcp server
 
@@ -20,4 +20,10 @@ require("./modules_files/searchModulesNet.js").searchModulesNet();
 // }, 2000);
 var expressServer = require("./expressServer");
 
-expressServer.startExpress(8080);   
+expressServer.startExpress(8080); 
+
+setTimeout(function () {
+    setInterval(function (){
+        alg.alg();    
+    }, 5000);
+}, 2000);  

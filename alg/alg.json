@@ -1,35 +1,21 @@
 {
-    "count":"2",
+    "count":"1",
     "0":{
+        "toggled":"0",
         "if":{
-            "in":"192.168.0.55",
+            "in":"192.168.0.8",
             "func":"value",
             "valueName":"temp",
             "l":">",
-            "rvalue":"25"
+            "rvalue":"26"
         },
         "then":{
-            "out":"192.168.0.56",
+            "out":"commandeLine",
             "func":"send",
             "mes":{
-                "lcd0":"TEST"
-            }
-        }
-    },
-    "1":{
-        "if":{
-            "in":"192.168.0.55",
-            "func":"value",
-            "valueName":"temp",
-            "l":"<",
-            "rvalue":"35"
-        },
-        "then":{
-            "out":"192.168.0.56",
-            "func":"send",
-            "mes":{
-                "lcd0":"TEST"
+                "text":"TEST"
             }
         }
     }
+    
 }
