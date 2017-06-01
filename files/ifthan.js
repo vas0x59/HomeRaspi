@@ -1,3 +1,52 @@
+function table(scenary) {
+    var row = $('<tr>');
+    row.hide();
+
+
+
+    var scenaryId = $('<td>');
+    scenaryId.html(scenary.id);
+    scenaryId.width('40px');
+
+    var scenaryIf = $('<td>');
+
+
+    var scenaryThan = $('<td>');
+
+
+
+    row.append(scenaryId);
+    row.append(scenaryIf);
+
+    row.append(scenaryThan);
+
+
+    var button2 = $('<td>');
+
+
+    var uploadButton2 = $('<button>');
+    uploadButton2.attr('class', 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored');
+    uploadButton2.attr('style', 'color: #ff5722;');
+    uploadButton2.html('x');
+    uploadButton2.click(function () {
+
+        row.fadeOut(300, function () {
+            $(this).remove();
+        });
+
+    });
+
+    button2.append(uploadButton2);
+
+    //row.append(scenaryInfo);
+
+    // row.append(button1);
+    row.append(button2);
+    row.fadeIn();
+
+    $('#files').prepend(row);
+}
+
 var xhr = new XMLHttpRequest();
 
 xhr.open('GET', 'alg/alg.json', true);
@@ -9,11 +58,13 @@ xhr.onreadystatechange = function () { // (3)
 
     button.innerHTML = 'Готово!';
 
-
+    var dataInput = JSON.parse(xhr.responseText);
 
     var scenaries = {};
 
-    var scenaries_index = 0;
+    scenaries = dataInput;
+
+    var scenaries_index = Number(dataInput.count);
 
     function b1() {
         var scenar = {};
@@ -31,51 +82,5 @@ xhr.onreadystatechange = function () { // (3)
     }
 
 
-    function table(scenary) {
-        var row = $('<tr>');
-        row.hide();
 
-
-
-        var scenaryId = $('<td>');
-        scenaryId.html(scenary.id);
-        scenaryId.width('40px');
-
-        var scenaryIf = $('<td>');
-
-
-        var scenaryThan = $('<td>');
-
-
-
-        row.append(scenaryId);
-        row.append(scenaryIf);
-
-        row.append(scenaryThan);
-
-
-        var button2 = $('<td>');
-
-
-        var uploadButton2 = $('<button>');
-        uploadButton2.attr('class', 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored');
-        uploadButton2.attr('style', 'color: #ff5722;');
-        uploadButton2.html('x');
-        uploadButton2.click(function () {
-
-            row.fadeOut(300, function () {
-                $(this).remove();
-            });
-
-        });
-
-        button2.append(uploadButton2);
-
-        //row.append(scenaryInfo);
-
-        // row.append(button1);
-        row.append(button2);
-        row.fadeIn();
-
-        $('#files').prepend(row);
-    }
+}

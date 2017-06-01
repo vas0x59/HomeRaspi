@@ -84,7 +84,7 @@ io.on('connection', function (socket) {
 // });
 
 app.use(express.static('files'));
-app.use("alg",express.static('files'));
+app.use("alg",express.static('alg'));
 
 function startExpress(port) {
 

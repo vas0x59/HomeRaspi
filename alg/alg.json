@@ -1,1 +1,20 @@
-{"0":{"toggled":"0","if":{"in":"192.168.0.8","func":"value","valueName":"temp","l":">","rvalue":"26"},"then":{"out":"commandeLine","func":"send","mes":{"text":"TEST"}}},"count":"1"}
+{
+    "0": {
+        "toggled": "0",
+        "if": {
+            "in": "192.168.0.8",
+            "func": "value",
+            "valueName": "temp",
+            "l": ">",
+            "rvalue": "26"
+        },
+        "then": {
+            "out": "commandeLine",
+            "func": "send",
+            "mes": {
+                "text": "TEST"
+            }
+        }
+    },
+    "count": "1"
+}
