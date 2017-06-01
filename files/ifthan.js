@@ -9,7 +9,11 @@ function table(scenary) {
     scenaryId.width('40px');
 
     var scenaryIf = $('<td>');
-    scenaryIf.append('<p>in</p><input id="' + scenary.id + 'In" />');
+    scenaryIf.append(
+          '<p style="display: inline;">in: </p><input style="width:75px;margin:5px;" id="' + scenary.id + 'In" />'
+        + '<p style="display: inline;">in: </p><input style="width:75px;margin:5px;" id="' + scenary.id + 'In" />'
+        + '<p style="display: inline;">in: </p><input style="width:75px;margin:5px;" id="' + scenary.id + 'In" />'
+    );
 
     var scenaryThan = $('<td>');
 
