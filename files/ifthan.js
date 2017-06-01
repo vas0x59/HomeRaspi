@@ -77,9 +77,5 @@ function b1() {
     scenaries_index++;
 }
 function b2() {
-    var scenar = {};
-    scenar.id = scenaries_index;
-    scenaries[scenaries_index] = scenar;
-    table(scenaries[scenaries_index]);
-    scenaries_index++;
+
 }

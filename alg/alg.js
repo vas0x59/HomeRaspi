@@ -35,32 +35,34 @@ function alg() {
         var boolWriteToFile = false;
         for (var index = 0; index < data.count; index++) {
             var element = data[index];
-            if (logicFunc(gv.modules[element.if.in].value[element.if.valueName], element.if.l, element.if.rvalue)) {
-                if (data[index].toggled == "0") {
-                    console.log("true" + index);
-                    boolWriteToFile = true;
+            if (gv.modules[element.if.in] != null) {
+                if (logicFunc(gv.modules[element.if.in].value[element.if.valueName], element.if.l, element.if.rvalue)) {
+                    if (data[index].toggled == "0") {
+                        console.log("true" + index);
+                        boolWriteToFile = true;
+                    }
+                    else {
+                        if (boolWriteToFile != true) {
+                            boolWriteToFile = false;
+                        }
+                    }
+                    data[index].toggled = "1";
                 }
                 else {
-                    if (boolWriteToFile != true) {
-                        boolWriteToFile = false;
+                    if (data[index].toggled == "1") {
+                        boolWriteToFile = true;
                     }
-                }
-                data[index].toggled = "1";
-            }
-            else {
-                if (data[index].toggled == "1") {
-                    boolWriteToFile = true;
-                }
-                else {
-                    if (boolWriteToFile != true) {
-                        boolWriteToFile = false;
+                    else {
+                        if (boolWriteToFile != true) {
+                            boolWriteToFile = false;
+                        }
                     }
+                    data[index].toggled = "0";
                 }
-                data[index].toggled = "0";
             }
         }
-        if (boolWriteToFile == true){
-            fs.writeFile(path.join(__dirname, 'alg.json'),JSON.stringify(data),function (err) {
+        if (boolWriteToFile == true) {
+            fs.writeFile(path.join(__dirname, 'alg.json'), JSON.stringify(data), function (err) {
                 console.error(err)
             });
         }
