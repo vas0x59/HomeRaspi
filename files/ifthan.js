@@ -9,7 +9,7 @@ function table(scenary) {
     scenaryId.width('40px');
 
     var scenaryIf = $('<td>');
-
+    scenaryIf.append('<p>in</p><input id="' + scenary.id + 'In" />');
 
     var scenaryThan = $('<td>');
 
@@ -53,6 +53,9 @@ xhr.open('GET', 'alg/alg.json', true);
 
 xhr.send(); // (1)
 
+var scenaries_index = 0;
+var scenaries = {};
+
 xhr.onreadystatechange = function () { // (3)
     if (xhr.readyState != 4) return;
 
@@ -60,34 +63,36 @@ xhr.onreadystatechange = function () { // (3)
 
     var dataInput = JSON.parse(xhr.responseText);
 
-    var scenaries = {};
+    scenaries = {};
 
     scenaries = dataInput;
 
-    var scenaries_index = Number(dataInput.count);
+    scenaries_index = Number(dataInput.count);
 
-    function b1() {
-        var scenar = {};
-        scenar.id = scenaries_index;
-        scenaries[scenaries_index] = scenar;
-        table(scenaries[scenaries_index]);
-        scenaries_index++;
-    }
-    function b2() {
-        var scenar = {};
-        scenar.id = scenaries_index;
-        scenaries[scenaries_index] = scenar;
-        table(scenaries[scenaries_index]);
-        scenaries_index++;
-    }
+
 
     for (var index = 0; index < scenaries_index; index++) {
         var element = scenaries[index];
         table(element);
     }
 
-    
 
 
 
+
+}
+
+function b1() {
+    var scenar = {};
+    scenar.id = scenaries_index;
+    scenaries[scenaries_index] = scenar;
+    table(scenaries[scenaries_index]);
+    scenaries_index++;
+}
+function b2() {
+    var scenar = {};
+    scenar.id = scenaries_index;
+    scenaries[scenaries_index] = scenar;
+    table(scenaries[scenaries_index]);
+    scenaries_index++;
 }
