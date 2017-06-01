@@ -5,6 +5,6 @@
 Выполните в терминале 
 
 ```bash
-    npm install
-    node main.js
+npm install
+node main.js
 ```
