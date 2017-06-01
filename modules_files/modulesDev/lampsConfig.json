@@ -1,0 +1,14 @@
+{
+    "testip":{
+        "ch0_title":"satandart",
+        "ch1_title":"satandart",
+        "ch2_title":"satandart",
+        "ch3_title":"humid"
+    },
+    "192.168.0.52":{
+        "ch0_title":"satandart",
+        "ch1_title":"satandart",
+        "ch2_title":"satandart",
+        "ch3_title":"humid"
+    } 
+}

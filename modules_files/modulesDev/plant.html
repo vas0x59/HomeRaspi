@@ -1,0 +1,91 @@
+<div class="box" >
+
+
+
+    <div class="IO_box">
+        <h5 class="planth5">Plant</h5>
+        <div style="position: relative;padding: 0px;">
+            <p>Температура: <span id="temp{{ip}}">...</span>°C</p>
+            <p>Влажность: <span id="humid{{ip}}">...</span>%</p>
+            <p>Влажность почвы: <span id="humidM{{ip}}">...</span>мм р.с.</p>
+            <label onclick='send_request3("1")' class="buttonC" style="margin-left:0px;padding: 6px;color:#fff; background-color:#b5e02a;">Полить</label><br/>
+            <label for="colorWell">Color:</label>
+            <input type="color" onchange="sendVal(this);" id="colorWell">
+        </div>
+
+    </div>
+    <script>
+                                         function cutHex(h) { return (h.charAt(0) == "#") ? h.substring(1, 7) : h }
+                                         function toR(h) { return parseInt((cutHex(h)).substring(0, 2), 16) }
+                                         function toG(h) { return parseInt((cutHex(h)).substring(2, 4), 16) }
+                                         function toB(h) { return parseInt((cutHex(h)).substring(4, 6), 16) }
+
+
+                                         function toHEX(r, g, b) { return '#' + ((b | g << 8 | r << 16) | 1 << 24).toString(16).slice(1); }
+
+                                         var r = 0;
+                                         var g = 0;
+                                         var b = 0;
+    </script>
+    <script>
+        socket.on('dataOut{{ip}}', function (msg2) {
+            var body2 = JSON.parse(msg2);
+            console.log(body2);
+            var t = String(body2.value.temp);
+            var h = String(body2.value.humid);
+            var hm = String(body2.value.humidM);
+            console.log(t + " " + h + " " + hm);
+            document.getElementById("temp{{ip}}").innerText = t;
+            document.getElementById("humid{{ip}}").innerText = h;
+            document.getElementById("humidM{{ip}}").innerText = hm;
+            r = body2.value.r;
+            g = body2.value.g;
+            b = body2.value.b;
+
+
+            var input = document.getElementById("colorWell");
+            input.value = toHEX(r, g, b);
+        });
+    </script>
+    <script>
+        function send_request3(params) {
+            var mesOut = {};
+            mesOut.ip = "{{ip}}";
+            mesOut.id = "{{id}}";
+            mesOut.type = "comande_pompa";
+            var body = {};
+            body.pompa = String(params);
+            mesOut.body = body;
+            socket.emit('dataIn2', JSON.stringify(mesOut));
+        }
+    </script>
+
+    <script>
+        function sendVal(params) {
+            var h = params.value;
+            var mesOut = {};
+            mesOut.ip = "{{ip}}";
+            mesOut.id = "{{id}}";
+            mesOut.type = "comande";
+            var body = {};
+            r = toR(h);
+            g = toG(h);
+            b = toB(h);
+            body.r = String(r);
+            body.g = String(g);
+            body.b = String(b);
+
+            mesOut.body = body;
+            socket.emit('dataIn', JSON.stringify(mesOut));
+        }
+
+
+
+        setInterval(function () {
+            var mesOut = {};
+            mesOut.ip = "{{ip}}";
+            mesOut.id = "{{id}}";
+            socket.emit('dataGet', JSON.stringify(mesOut));
+        }, 1200);
+    </script>
+</div>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Умный дом v3</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+    </script>
+
+</head>
+
+<body>
+    <header>
+        <h1>Умный дом v3</h1>
+
+        <div class="menu">
+            <a href='/'>Main</a>
+            <a href='/config'>Config</a>
+            
+            <a href=':8081/files'>fs</a>
+        </div>
+
+        <p class="small_texta">raspberry pi 3b Home v3 3/05/17 Vasily Yuruev</p>
+    </header>
+    <div class="content">

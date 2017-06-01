@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="mdl/material.min.css">
+    <script src="mdl/material.min.js"></script>
+    <script src="jquery/jquery.min.js"></script>
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
+    <link rel="stylesheet" href="fonts/material.css">
+    <script src="/upload.js"></script>
+
+</head>
+
+<body style="background-attachment: fixed; background-image: url('Yandex-Images-2017-04-08.jpg');">
+    <!-- Uses a transparent header that draws on top of the layout's background -->
+    <style>
+        .demo-layout-transparent {
+            background: url('../assets/demos/transparent.jpg') center / cover;
+        }
+        
+        .demo-layout-transparent .mdl-layout__header,
+        .demo-layout-transparent .mdl-layout__drawer-button {
+            /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+            color: #fff;
+        }
+    </style>
+
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+        <header class="mdl-layout__header mdl-layout__header--transparent" style="background-color: rgba(0, 0, 0, 0.7)">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Main</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <nav class="mdl-navigation">
+                    <button id="button_reboot" style="-webkit-app-region: no-drag; background-color: #f44336;box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2)"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Reboot</button>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Menu</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="/index.html">Main</a>
+                <a class="mdl-navigation__link" href="/run.html">Run</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="content" style="margin: 15px;background-color:rgba(0, 0, 0, 0.6);  padding: 8px; width: max-content; margin-top: 50px;">
+
+
+
+
+                <!-- Simple Textfield -->
+
+                <input type="file" style="display: none" name="uploadFiles" id="uploadFiles" multiple>
+
+                <button id="uploadAllFilesButton" style="-webkit-app-region: no-drag; color: #8bc34a;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.4)"
+                    class="mdl-button mdl-js-button">Upload All</button>
+                <button id="addFilesButton" style="-webkit-app-region: no-drag; color: #009688;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.4)"
+                    class="mdl-button mdl-js-button">Add</button>
+                <!--<div class="mdl-textfield mdl-js-textfield" style="width: 100px; margin-left: 10px;">
+                    <input class="mdl-textfield__input" type="text" style="color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.35);" id="del_name" />
+                    <style>
+                        label.mdl-textfield__label:after {
+                            background-color: #fff;
+                        }
+                    </style>
+                    <label class="mdl-textfield__label" for="del_name"></label>
+                </div>
+                <button id="del_b" style="-webkit-app-region: no-drag; background-color: #ff5722;box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4)"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Del</button>-->
+                <div class="mdl-textfield mdl-js-textfield" style="width: 100px; margin-left: 10px;">
+                    <input class="mdl-textfield__input" type="text" style="color: #fff; border-bottom: 1px solid rgba(255, 255, 255, 0.35);" id="dir_name" />
+                    <style>
+                        label.mdl-textfield__label:after {
+                            background-color: #ffc107;
+                        }
+                    </style>
+                    <label class="mdl-textfield__label" for="del_name">dir...</label>
+                </div>
+                <button id="del_b" style="-webkit-app-region: no-drag; color: #ffc107;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.4)"
+                    class="mdl-button mdl-js-button" onclick="list_b();">list</button>
+
+
+
+            </div>
+            <div class="content" style="margin: 15px; padding: 8px; width: max-content; margin-top: 50px;">
+                <table class="mdl-data-table mdl-shadow--2dp table" id="files">
+                    <thead>
+                        <tr>
+                            <!-- Simple MDL Progress Bar -->
+                            <style>
+                                .mdl-progress>.progressbar {
+                                    background-color: #ff5722;
+                                    z-index: 1;
+                                    left: 0;
+                                }
+                                
+                                .mdl-progress>.bufferbar {
+                                    background-image: linear-gradient(to right, rgba(255, 255, 255, .7), rgba(255, 255, 255, .7)), linear-gradient(to right, #ff5722, #ff5722);
+                                    z-index: 0;
+                                    left: 0;
+                                }
+                            </style>
+
+
+                            <div id="pro1" class="mdl-progress mdl-js-progress" style="width: 100%;"></div>
+                           
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_file">
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="content" style="margin: 15px; padding: 8px; width: max-content; margin-top: 50px;">
+                <table class="mdl-data-table mdl-shadow--2dp table" id="filesdirrr">
+                    <tbody id="file_list">
+
+
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

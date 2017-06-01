@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="mdl/material.min.css">
+    <script src="mdl/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+<body style="background-attachment: fixed; background-image: url('Yandex-Images-2017-04-08.jpg');">
+    <!-- Uses a transparent header that draws on top of the layout's background -->
+    <style>
+        
+        
+        .demo-layout-transparent .mdl-layout__header,
+        .demo-layout-transparent .mdl-layout__drawer-button {
+            /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+            color: #fff;
+        }
+    </style>
+
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+        <header class="mdl-layout__header mdl-layout__header--transparent" style="background-color: rgba(0, 0, 0, 0.7)">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Run</span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <nav class="mdl-navigation">
+                    <button style="-webkit-app-region: no-drag; background-color: #f44336;box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2)"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Reboot</button>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Menu</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="/index.html">Main</a>
+                <a class="mdl-navigation__link" href="/run.html">Run</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="content" style="margin: 20px; background-color: #fff; padding: 8px; width: max-content; margin-top: 50px;">
+                <script src="/socket.io/socket.io.js"></script>
+                <script src="/run.js"></script>
+
+                
+                <!-- Simple Textfield -->
+
+                <div class="mdl-textfield mdl-js-textfield" style="width: 100px; margin-left: 10px;">
+                    <input class="mdl-textfield__input" type="text" id="command_name" />
+                    <style>
+                        label.mdl-textfield__label:after {
+                            background-color: #ff5722;
+                        }
+                    </style>
+                    <label class="mdl-textfield__label" for="sample1">command_name...</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield" style="width: 100px; margin-left: 10px;">
+                    <input class="mdl-textfield__input" type="text" id="command_arg" />
+                    <style>
+                        label.mdl-textfield__label:after {
+                            background-color: #ff5722;
+                        }
+                    </style>
+                    <label class="mdl-textfield__label" for="sample1">command_arg...</label>
+                </div>
+
+
+
+
+                <button id="button_run" onclick="button_run();" style="-webkit-app-region: no-drag; background-color: #ff5722;box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2)"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Run</button>
+
+
+
+                <!--<button id="clear" style="-webkit-app-region: no-drag; color: #00BCD4;box-shadow: 0px 0px 0px rgba(0, 0, 0, 0)" class="mdl-button mdl-js-button mdl-js-ripple-effect">Clear</button>-->
+                <pre id="ans_content1"></pre>
+                <!--<pre id="file-err" style="color: #F44336"></pre>-->
+                
+
+
+            </div>
+        </main>
+    </div>
+
+
+</body>
+
+
+</html>

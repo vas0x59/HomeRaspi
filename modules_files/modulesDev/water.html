@@ -1,0 +1,29 @@
+<div class="dis" id="waterno">
+
+    <p style="color: #fff; float:left;">Протечка!!!</p>
+    <!--<div style="background-color: #fff; float:left; padding-left:5px; padding-right:5px; margin-left:5px; cursor:pointer;">
+                <p style="color: rgb(149, 211, 64)">OK</p>
+    </div>-->
+</div>
+<script>
+    socket.on('dataOut{{ip}}', function (msg3) {
+        var body3 = JSON.parse(msg3);
+        console.log(body3);
+        var water = String(body3.value.water);
+        console.log(water);
+        if (water == 1) {
+            document.getElementById("waterno").className = "in";
+        }
+        else {
+            document.getElementById("waterno").className = "dis";
+        }
+
+    });
+    setInterval(function () {
+        var mesOut2 = {};
+        mesOut2.ip = "{{ip}}";
+        mesOut2.id = "{{id}}";
+        socket.emit('dataGet', JSON.stringify(mesOut2));
+    }, 1200);
+
+</script>

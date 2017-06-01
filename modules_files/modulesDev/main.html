@@ -1,0 +1,41 @@
+<div class="box">
+
+    <div class="IO_box">
+        <h5 class="mainh5">Main</h5>
+        <!--<div class="menu">-->
+        <!--<a href='device_setup.htm'>Перепрошивка</a>-->
+
+
+        <!--<p>rssi: <span class="rssi">...</span>dBm</p>-->
+        <!--                <h2>В доме</h2>-->
+        <p>Температура: <span id="temp{{ip}}">...</span>°C</p>
+        <p>Влажность: <span id="humid{{ip}}">...</span>%</p>
+        <p>Давление: <span id="press{{ip}}">...</span>мм р.с.</p>
+        <!--<p class="small_text">MainSwitch</p>
+            <div class="switch">
+                <label id="MainSwitch" class="onmn"></label><br />
+            </div>-->
+    </div>
+
+
+
+    <script>
+        socket.on('dataOut{{ip}}', function (msg2) {
+            var body2 = JSON.parse(msg2);
+            console.log(body2);
+            var t = String(body2.value.temp);
+            var h = String(body2.value.humid);
+            var p = String(body2.value.press);
+             console.log(t + " " + h + " " + p);
+            document.getElementById("temp{{ip}}").innerText = t;
+            document.getElementById("humid{{ip}}").innerText = h;
+            document.getElementById("press{{ip}}").innerText = p;
+        });
+        setInterval(function () {
+            var mesOut2 = {};
+            mesOut2.ip = "{{ip}}";
+            mesOut2.id = "{{id}}";
+            socket.emit('dataGet', JSON.stringify(mesOut2));
+        }, 1200);
+    </script>
+</div>

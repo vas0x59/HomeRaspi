@@ -1,0 +1,137 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Умный дом Настройка</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function send_request(server) {
+
+
+
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", server, true);
+            xmlHttp.send(null);
+        }
+        function val(id) {
+            var v = document.getElementById(id).value;
+            return v;
+        }
+        function set_ssid() {
+            server = "/ssid?ssid=" + val('ssid') + "&password=" + encodeURIComponent(val('password'));
+            send_request(server);
+            alert('Конфигурация сети изменина');
+        }
+        function set_lamptime() {
+            server = "/lamptime?time=" + val('lamptime');
+            send_request(server);
+            alert('Конфигурация lamptime изменина');
+        }
+        function set_lamptime2() {
+            server = "/lamptime2?time=" + val('lamptime2');
+            send_request(server);
+            alert('Конфигурация lamptime2 изменина');
+        }
+        function set_cutime() {
+            server = "/cutime?time=" + val('cutime');
+            send_request(server);
+            alert('Конфигурация cutime изменина');
+        }
+        function set_cutime2() {
+            server = "/cutime2?time=" + val('cutime2');
+            send_request(server);
+            alert('Конфигурация cutime2 изменина');
+        }
+        function loadBlock(jsonResponse) {
+            var data = document.getElementsByTagName('body')[0].innerHTML;
+            var new_string;
+            for (var key in jsonResponse) {
+                new_string = data.replace(new RegExp('{{' + key + '}}', 'g'), jsonResponse[key]);
+                data = new_string;
+            }
+            document.getElementsByTagName('body')[0].innerHTML = new_string;
+            //         handleServerResponse();
+        }
+        function load(first) {
+            var xmlHttp = new XMLHttpRequest();
+            if (xmlHttp.readyState == 0 || xmlHttp.readyState == 4) {
+                xmlHttp.open('PUT', '/config.json', true);
+                xmlHttp.send(null);
+                xmlHttp.onreadystatechange = function () {
+                    var jsonResponse1 = JSON.parse(xmlHttp.responseText);
+
+
+
+                    if (first == 'first') {
+                        //toggle('content');
+                        loadBlock(jsonResponse1);
+                    }
+
+                }
+            }
+        }
+    </script>
+</head>
+
+<body onload="load('first');">
+    <h1>Умный дом</h1>
+    <!--<h2>Настройка</h2>-->
+    <div class="menu">
+        <a href='index.htm'>Главная</a>
+    </div>
+
+    <p class="small_texta">esp8266 Home v3 3/01/2017 Vasily Yuruev</p>
+    <div class="box">
+
+        <div class="IO_box">
+            <h5 class="setuph5">WiFi<img src="wifiicon24.png" width="18" height="18" alt="lorem" style="margin-left:5px;margin-bottom:-2px;"></h5>
+            <input id="ssid" value="{{ssidName}}" class="form-control hidden" pattern="[0-9a-zA-Z.]{1,15}" style="width:100px;">
+            <input id="password" value="{{ssidPassword}}" pattern=".{8,15}" onfocus="this.type='text'" type="password" style="width:100px;">
+            <input class="btn btn-block btn-success" value="Save" onclick="set_ssid();" type="submit">
+        </div>
+
+
+    </div>
+    <div class="box">
+        <div class="IO_box">
+            <h5 class="lamph5">Lamp</h5>
+
+            <!--                <h2>LEDs</h2>-->
+            <p class="small_text">Авто выключение света во всём доме</p>
+
+            <input id="lamptime" value="{{lamptime}}" class="form-control hidden" pattern="[0-9a-zA-Z.]{1,15}" style="width:30px;margin-left:10px;">
+            <input class="btn btn-block btn-success" value="Save" onclick="set_lamptime();" type="submit">
+
+
+
+            <!--                <h2>LEDs</h2>-->
+            <p class="small_text">Авто включение света во всём доме</p>
+
+            <input id="lamptime2" value="{{lamptime2}}" class="form-control hidden" pattern="[0-9a-zA-Z.]{1,15}" style="width:30px;margin-left:10px;">
+            <input class="btn btn-block btn-success" value="Save" onclick="set_lamptime2();" type="submit">
+        </div>
+    </div>
+    <div class="box">
+        <div class="IO_box">
+            <h5 class="curth5">Curtains</h5>
+
+            <!--                <h2>LEDs</h2>-->
+            <p class="small_text">Авто закрытин</p>
+
+            <input id="cutime" value="{{cutime}}" class="form-control hidden" pattern="[0-9a-zA-Z.]{1,15}" style="width:30px;margin-left:10px;">
+            <input class="btn btn-block btn-success" value="Save" onclick="set_cutime();" type="submit">
+
+
+
+            <!--                <h2>LEDs</h2>-->
+            <p class="small_text">Авто включение света во всём доме</p>
+
+            <input id="cutime2" value="{{cutime2}}" class="form-control hidden" pattern="[0-9a-zA-Z.]{1,15}" style="width:30px;margin-left:10px;">
+            <input class="btn btn-block btn-success" value="Save" onclick="set_cutime2();" type="submit">
+        </div>
+    </div>
+</body>
+
+</html>

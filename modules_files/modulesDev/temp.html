@@ -1,0 +1,23 @@
+<div class="box">
+    <div class="IO_box">
+        <h5 class="temph5">Temp</h5>
+
+        <p>Температура: <span id="temp2{{ip}}">...</span>°C</p>
+    </div>
+    <script>
+        socket.on('dataOut{{ip}}', function (msg3) {
+            var body3 = JSON.parse(msg3);
+            console.log(body3);
+            var t2 = String(body3.value.temp);
+            console.log(t2);
+            document.getElementById("temp2{{ip}}").innerText = t2;
+            
+        });
+        setInterval(function () {
+            var mesOut2 = {};
+            mesOut2.ip = "{{ip}}";
+            mesOut2.id = "{{id}}";
+            socket.emit('dataGet', JSON.stringify(mesOut2));
+        }, 1200);
+    </script>
+</div>

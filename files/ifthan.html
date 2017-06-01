@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="mdl/material.min.css">
+    <script src="mdl/material.min.js"></script>
+    <script src="jquery/jquery.min.js"></script>
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
+    <link rel="stylesheet" href="fonts/material.css">
+    <script src="ifthan.js"></script>
+</head>
+
+<body>
+    <div class="content" style="margin: 15px; padding: 8px; width: max-content; margin-top: 50px;">
+        <button id="addScenaryButton" onclick="b1();" style="background-color: #009688;box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4)"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Add</button>
+        <button id="saveButton" onclick="b2();"  style="background-color: #8bc34a;box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4)"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Save</button>
+    </div>
+    <style>
+        .mdl-data-table tbody tr:hover {
+            background-color: #fafafa;
+        }
+    </style>
+    <div class="content" style="margin: 15px; padding: 8px; width: max-content; margin-top: 50px;">
+        <table class="mdl-data-table mdl-shadow--2dp table" id="files">
+            <tbody id="tbody_file">
+
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

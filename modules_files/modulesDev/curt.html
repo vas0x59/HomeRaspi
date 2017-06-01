@@ -1,0 +1,52 @@
+<div class="box">
+    <div class="IO_box">
+        <h5 class="curth5">Curtain {{ip}}</h5>        
+        <p class="small_text">Шторы</p>
+        <div class="switch">
+            <label id="curt_{{ip}}" class="offc" onclick="GetButtonServo{{id}}()"></label><br />
+        </div>
+    </div>
+    <script>
+        
+    var state_servo{{id}};
+    function GetButtonServo{{id}}() {
+        //var ch = Number(String(el.id).substring(2, String(el.id).indexOf("_")));
+        if (state_servo{{id}} == 1){
+            state_servo{{id}} = 0;
+        }
+        else{
+            state_servo{{id}} = 1;
+        }
+        var mesOut = {};
+        mesOut.ip = "{{ip}}";
+        mesOut.id = "{{id}}";
+        mesOut.type = "comande";
+        var body = {};
+        body.servo = String(state_servo{{id}});           
+        mesOut.body = body;
+        socket.emit('dataIn', JSON.stringify(mesOut));
+    }
+    
+        socket.on('dataOut{{ip}}', function (msg) {
+            var body = JSON.parse(msg);
+            state_servo{{id}} =  body.value.servo;
+            var button{{id}};
+            button{{id}} = document.getElementById("curt_{{ip}}");
+            
+            if( state_servo{{id}} == 1){
+                button{{id}}.className = "onc";
+            }
+            if( state_servo{{id}} == 0){
+                button{{id}}.className = "offc";
+            }
+
+        });
+        setInterval(function () {
+            var mesOut = {};
+            mesOut.ip = "{{ip}}";
+            mesOut.id = "{{id}}";
+            socket.emit('dataGet', JSON.stringify(mesOut));
+        }, 800);
+        
+    </script>
+</div>

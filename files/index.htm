@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Умный дом v3</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+
+
+</head>
+
+<body>
+    <header>
+        
+        <h1>Умный дом v3</h1>
+
+        <div class="menu">
+            <a href='setup.htm'>Настройка</a>
+            <a href='irtv.htm'>irTV</a>
+            <a href='edit'>fs</a>
+        </div>
+
+        <p class="small_texta">esp8266 Home v3 02/02/17 Vasily Yuruev</p>
+    </header>
+    <div class="box">
+
+        <div class="IO_box">
+            <h5 class="mainh5">Main</h5>
+            <div class="menu">
+                <a href='device_setup.htm'>Перепрошивка</a>
+
+            </div>
+            <p>rssi: <span class="rssi">...</span>dBm</p>
+            <!--                <h2>В доме</h2>-->
+            <p>Температура: <span class="t1">...</span>°C</p>
+            <p>Влажность: <span class="h1">...</span>%</p>
+            <p>Давление: <span class="barometer">...</span>мм р.с.</p>
+            <p class="small_text">MainSwitch</p>
+            <div class="switch">
+                <label id="MainSwitch" class="onmn"></label><br />
+            </div>
+        </div>
+
+
+    </div>
+    <div class="box">
+        <h5 class="lamph5">Lamp1</h5>
+        <p class="discon" id="lamp_con_n1"></p>
+        <div class="menu">
+            <a href='http://192.168.0.52/set'>Перепрошивка</a>
+
+        </div>
+        <!--style="height:260px;"-->
+        <div class="IO_box" style="float: left;">
+            
+            <div class="sbd">
+
+                <label class="s" id="bs" onclick="speech()"><img src="m2.png"  width="24" height="24" alt="lorem" style="margin-left:8px;margin-top:8px;"></label>
+            </div>
+        </div>
+            <p class="small_text">ch1_1</p>
+            <div class="switch">
+                <label id="LED1" class="off" onclick="GetButton1()"></label><br />
+            </div>
+
+            <p class="small_text">ch1_2</p>
+            <div class="switch">
+                <label id="LED2" class="off" onclick="GetButton2()"></label><br />
+            </div>
+            <p class="small_text">ch1_3</p>
+            <div class="switch">
+                <label id="LED3" class="off" onclick="GetButton3()"></label><br />
+            </div>
+            <!--<p class="small_text">ch1_4</p>
+                <div class="switch">
+                <label id="LED4" class="off" onclick="GetButton4()"></label><br />
+                </div>-->
+
+
+
+        
+
+
+
+    </div>
+    <div class="in" id="waterno">
+
+            <p style="color: #fff; float:left;">Протечка!!!</p>
+            <!--<div style="background-color: #fff; float:left; padding-left:5px; padding-right:5px; margin-left:5px; cursor:pointer;">
+                <p style="color: rgb(149, 211, 64)">OK</p>
+            </div>-->
+    </div>
+    <div class="box">
+        <!--style="height:260px;"-->
+        <div class="IO_box" style="float: left;">
+            <h5 class="lamph5">Lamp2</h5>
+            <p class="discon" id="lamp_con_n2"></p>
+            <div class="menu">
+                <a href='http://192.168.0.51/set'>Перепрошивка</a>
+
+            </div>
+            <div class="sbd">
+
+                <label class="s" id="bs" onclick="speech()"><img src="m2.png"  width="24" height="24" alt="lorem" style="margin-left:8px;margin-top:8px;"></label>
+            </div>
+            <p class="small_text">ch2_1</p>
+            <div class="switch">
+                <label id="LED6" class="off" onclick="GetButton6()"></label><br />
+            </div>
+
+            <p class="small_text">ch2_2</p>
+            <div class="switch">
+                <label id="LED7" class="off" onclick="GetButton7()"></label><br />
+            </div>
+            <p class="small_text">ch2_3</p>
+            <div class="switch">
+                <label id="LED8" class="off" onclick="GetButton8()"></label><br />
+            </div>
+            <!--<p class="small_text">ch2_4</p>
+                <div class="switch">
+                <label id="LED9" class="off" onclick="GetButton9()"></label><br />
+                </div>-->
+
+
+
+        </div>
+
+
+
+    </div>
+    <div class="boxb">
+
+        <div class="boxs">
+
+            <div class="IO_box">
+                <h5 class="temph5">Temp</h5>
+
+                <p>Температура: <span class="t2">...</span>°C</p>
+            </div>
+
+
+        </div>
+        <div class="boxs">
+
+            <div class="IO_box">
+                <h5 class="curth5">Curtain</h5>
+                <p class="discon" id="servo_con"></p>
+                <!--                <p><span class="water">Протечек нет / Затоп</span></p>-->
+                <p class="small_text">Шторы</p>
+                <div class="switch">
+                    <label id="curt" class="offc" onclick="GetButton5()"></label><br />
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <div class="boxb">
+
+        <div class="boxs" style="height:110px">
+
+            <div class="IO_box">
+                <h5 class="condh5">Сond</h5>
+
+
+
+                <div style="position: relative;
+            padding: 0px;
+            ">
+                    <label onclick='send_request("/condonoff")' class="buttonC" style="margin-left:0px;height:30px;width:30px;top:-20px;background-color:#009688;"
+                        id="condTempOnOff"><img src="power.png"  width="18" height="18" alt="lorem" style="margin-left:5px;margin-top:5px;"></label><br
+                    />
+                </div>
+                <div style="position: relative;
+            margin: 2px;
+            float: left;">
+                    <label onclick='send_request("/condp");' class="buttonC" style="margin-left:-2px;height:30px;width:30px;top:15px;background-color:#009688;"
+                        id="condTempMin"><img src="+123.png"  width="12" height="12" alt="lorem" style="margin-left:9px;margin-top:9px;"></label><br
+                    />
+                </div>
+
+                <div style="position: relative;
+            margin: 2px;
+            float: left;">
+                    <label onclick='send_request("/condm");' class="buttonC" style="margin-left:68px;height:30px;width:30px;top:15px;background-color:#009688;"
+                        id="condTempPlu"><img src="124334243.png"  width="12" height="3" alt="" style="margin-left:9px;margin-top:14px;"></label><br
+                    />
+                </div>
+            </div>
+            <p class="small_text" style="margin-left:40px;font-size:80%;"><span style="text-align:center;">{{condtemp}}</span></p>
+
+        </div>
+        <div class="boxs">
+
+            <div class="IO_box">
+                <h5 class="curth5" style="background-color:#4FC3F7;">Humid</h5>
+
+                <!--                <p><span class="water">Протечек нет / Затоп</span></p>-->
+                <p class="small_text">вкл / выкл</p>
+                <div class="switch">
+                    <label id="LED9" class="on" onclick="GetButton9();"></label><br />
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div class="box" style="height:102px;">
+
+        <div class="IO_box">
+            <h5 class="lamph5" style="background-color: rgb(255, 126, 31);">WF</h5>
+
+
+            <p class="small_text">Тёплый пол</p>
+            <div class="switch">
+                <label id="LED4" class="off" onclick="GetButton4();"></label><br />
+            </div>
+        </div>
+
+
+    </div>
+    <div class="box">
+        <h6 id="texth">RGB</h6>
+        <input id="h" oninput="changecolor();" type="color" />
+    </div>
+
+
+
+</body>
+
+</html>

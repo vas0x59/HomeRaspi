@@ -1,0 +1,123 @@
+<div class="box">
+    <!--style="height:260px;"-->
+    <div class="IO_box" style="float: left;">
+        <h5 class="lamph5">Lamp {{ip}}</h5>
+        <p class="discon" id="lamp_con_n2"></p>
+        <div class="menu">
+            <a href="http://{{ip}}/set">Перепрошивка</a>
+
+        </div>
+
+        <p class="small_text">{{ch0_title}}</p>
+        <div class="switch">
+            <label id="ch0_{{ip}}" class="off" onclick="GetButton{{id}}(this)"></label><br />
+        </div>
+        <p class="small_text">{{ch1_title}}</p>
+        <div class="switch">
+            <label id="ch1_{{ip}}" class="off" onclick="GetButton{{id}}(this)"></label><br />
+        </div>
+        <p class="small_text">{{ch2_title}}</p>
+        <div class="switch">
+            <label id="ch2_{{ip}}" class="off" onclick="GetButton{{id}}(this)"></label><br />
+        </div>
+        <p class="small_text">{{ch3_title}}</p>
+        <div class="switch">
+            <label id="ch3_{{ip}}" class="off" onclick="GetButton{{id}}(this)"></label><br />
+        </div>
+
+    </div>
+
+</div>
+<div class="box" style="height:110px">
+
+    <div class="IO_box">
+        <h5 class="condh5">IRsender</h5>
+        <div style="position: relative;
+            padding: 0px;
+            ">
+            <label onclick='send_request2("16769025")' class="buttonC" style="margin-left:0px;height:30px;width:30px;top:-20px;background-color:#009688;"
+                id="condTempOnOff"><img src="power.png"  width="18" height="18" alt="lorem" style="margin-left:5px;margin-top:5px;"></label><br
+            />
+        </div>
+        <div style="position: relative;
+            margin: 2px;
+            float: left;">
+            <label onclick='send_request2("16771222");' class="buttonC" style="margin-left:-2px;height:30px;width:30px;top:15px;background-color:#009688;"
+                id="condTempMin"><img src="+123.png"  width="12" height="12" alt="lorem" style="margin-left:9px;margin-top:9px;"></label><br
+            />
+        </div>
+
+        <div style="position: relative;
+            margin: 2px;
+            float: left;">
+            <label onclick='send_request2("16753458");' class="buttonC" style="margin-left:68px;height:30px;width:30px;top:15px;background-color:#009688;"
+                id="condTempPlu"><img src="124334243.png"  width="12" height="3" alt="" style="margin-left:9px;margin-top:14px;"></label><br
+            />
+        </div>
+    </div>
+    <p class="small_text" style="margin-left:40px;font-size:80%;"><span style="text-align:center;">{{condtemp}}</span></p>
+
+</div>
+<script>
+    function send_request2(params) {
+        var mesOut = {};
+            mesOut.ip = "{{ip}}";
+            mesOut.id = "{{id}}";
+            mesOut.type = "comande_ir";
+            var body = {};
+            body.ir = String(params);         
+            mesOut.body = body;
+            socket.emit('dataIn2', JSON.stringify(mesOut));
+    }
+</script>
+<script>
+    var state_ch{{id}} = [];
+    function GetButton{{id}}(el) {
+        var ch = Number(String(el.id).substring(2, String(el.id).indexOf("_")));
+        if (state_ch{{id}}[ch] == 1){
+            state_ch{{id}}[ch] = 0;
+        }
+        else{
+            state_ch{{id}}[ch] = 1;
+        }
+        var mesOut = {};
+            mesOut.ip = "{{ip}}";
+            mesOut.id = "{{id}}";
+            mesOut.type = "comande";
+            var body = {};
+            body.ch0 = String(state_ch{{id}}[0]);    
+            body.ch1 = String(state_ch{{id}}[1]);
+            body.ch2 = String(state_ch{{id}}[2]);
+            body.ch3 = String(state_ch{{id}}[3]);           
+            mesOut.body = body;
+            socket.emit('dataIn', JSON.stringify(mesOut));
+    }
+    
+        socket.on('dataOut{{ip}}', function (msg) {
+            var body = JSON.parse(msg);
+            state_ch{{id}}[0] =  body.value.ch0;
+            state_ch{{id}}[1] =  body.value.ch1;
+            state_ch{{id}}[2] =  body.value.ch2;
+            state_ch{{id}}[3] =  body.value.ch3;
+            var button{{id}} = [];
+            button{{id}}[0] = document.getElementById("ch0_{{ip}}");
+            button{{id}}[1] = document.getElementById("ch1_{{ip}}");
+            button{{id}}[2] = document.getElementById("ch2_{{ip}}");
+            button{{id}}[3] = document.getElementById("ch3_{{ip}}");
+            for (var i = 0; i < state_ch{{id}}.length; i++) {
+                if( state_ch{{id}}[i] == 1){
+                    button{{id}}[i].className = "on";
+                }
+                if( state_ch{{id}}[i] == 0){
+                    button{{id}}[i].className = "off";
+                }
+            }
+        });
+        setInterval(function () {
+            var mesOut = {};
+            mesOut.ip = "{{ip}}";
+            mesOut.id = "{{id}}";
+            socket.emit('dataGet', JSON.stringify(mesOut));
+        }, 800);
+        
+    </script>
