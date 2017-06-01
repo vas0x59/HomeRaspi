@@ -1,6 +1,6 @@
 {
-    "0": {
-        "id":"0",
+    "1": {
+        "id":"1",
         "toggled": "0",
         "if": {
             "in": "192.168.0.8",
@@ -10,7 +10,6 @@
         },
         "then": {
             "out": "commandeLine",
-            "func": "send",
             "mes": {
                 "text": "TEST"
             }

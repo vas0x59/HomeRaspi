@@ -19,7 +19,6 @@ function table(scenary) {
     var scenaryThan = $('<td>');
     scenaryThan.append(
           '<p style="display: inline;">out: </p><input style="width:75px;margin:5px;" id="' + scenary.id + 'In" />'
-        + '<p style="display: inline;">func: </p><input style="width:45px;margin:5px;" id="' + scenary.id + 'In" />'
         + '<p style="display: inline;">vn: </p><input style="width:45px;margin:5px;" id="' + scenary.id + 'In" />'
         + '<p style="display: inline;">v: </p><input style="width:45px;margin:5px;" id="' + scenary.id + 'In" />'
     );
@@ -58,7 +57,7 @@ xhr.onreadystatechange = function () { // (3)
 
 
 
-    for (var index = 0; index < scenaries_index; index++) {
+    for (var index = 1; index < scenaries_index; index++) {
         var element = scenaries[index];
         table(element);
     }
@@ -75,7 +74,9 @@ function b1() {
     scenaries[scenaries_index] = scenar;
     table(scenaries[scenaries_index]);
     scenaries_index++;
+    scenaries.count = scenaries_index;
 }
 function b2() {
-
+    var dataOut = JSON.stringify(scenaries)
+    socket.emit('algJson',dataOut);
 }

@@ -33,7 +33,7 @@ function alg() {
         console.log(err);
         data = JSON.parse(filedaa);
         var boolWriteToFile = false;
-        for (var index = 0; index < data.count; index++) {
+        for (var index = 1; index < data.count; index++) {
             var element = data[index];
             if (gv.modules[element.if.in] != null) {
                 if (logicFunc(gv.modules[element.if.in].value[element.if.valueName], element.if.l, element.if.rvalue)) {
