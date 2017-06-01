@@ -25,9 +25,7 @@ function Lamp(ipA, idm) {
     data.module = "lamp";
 
     this.data = data;
-    var file = fs.readFileSync(path.join(__dirname, "lampsConfigScenaries.json"), "utf-8");
-    var config = JSON.parse(file);
-    this.configTime = config[this.ip];
+
 
 
     //Lamp.prototype.idm = idm;
