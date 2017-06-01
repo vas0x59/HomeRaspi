@@ -81,6 +81,13 @@ xhr.onreadystatechange = function () { // (3)
         scenaries_index++;
     }
 
+    for (var index = 0; index < scenaries_index; index++) {
+        var element = scenaries[index];
+        table(element);
+    }
+
+    
+
 
 
 }
