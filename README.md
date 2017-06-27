@@ -1,7 +1,7 @@
 # HomeRaspi
 Умный Дом для Raspberry PI
 
-## Istalling
+## Installing
 Выполните в терминале 
 
 ```bash
