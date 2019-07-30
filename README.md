@@ -1,5 +1,5 @@
 # HomeRaspi
-Умный Дом для Raspberry PI
+Умный Дом на Raspberry PI
 
 ## Installing
 Выполните в терминале 
